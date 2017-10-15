@@ -16,12 +16,19 @@ enum Direction: Int, Countable {
     case down
 }
 
+struct Player: Generable {
+    let direction: Direction = .up
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         print(Counter(Direction.self).count)
+        _ = Evolver.run(geneType: Player.self, max: 10, per: 10, completion: { model, general in
+            return 0
+        })
     }
 
     override func didReceiveMemoryWarning() {

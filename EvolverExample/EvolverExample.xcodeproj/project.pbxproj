@@ -13,6 +13,8 @@
 		E7BB753A1F92EC9000E3B3E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7BB75391F92EC9000E3B3E3 /* Assets.xcassets */; };
 		E7BB753D1F92EC9000E3B3E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BB753B1F92EC9000E3B3E3 /* LaunchScreen.storyboard */; };
 		E7BB75481F92EC9000E3B3E3 /* EvolverExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB75471F92EC9000E3B3E3 /* EvolverExampleTests.swift */; };
+		E7BB75611F92F2F700E3B3E3 /* Evolver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BB75581F92ECB300E3B3E3 /* Evolver.framework */; };
+		E7BB75621F92F2F700E3B3E3 /* Evolver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7BB75581F92ECB300E3B3E3 /* Evolver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,28 @@
 			remoteGlobalIDString = E7BB75111F92E65900E3B3E3;
 			remoteInfo = EvolverTests;
 		};
+		E7BB75631F92F2F700E3B3E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7BB75521F92ECB300E3B3E3 /* Evolver.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E7BB75071F92E65900E3B3E3;
+			remoteInfo = Evolver;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E7BB75651F92F2F700E3B3E3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E7BB75621F92F2F700E3B3E3 /* Evolver.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E7BB752F1F92EC9000E3B3E3 /* EvolverExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvolverExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7BB75611F92F2F700E3B3E3 /* Evolver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,10 +155,12 @@
 				E7BB752B1F92EC9000E3B3E3 /* Sources */,
 				E7BB752C1F92EC9000E3B3E3 /* Frameworks */,
 				E7BB752D1F92EC9000E3B3E3 /* Resources */,
+				E7BB75651F92F2F700E3B3E3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E7BB75641F92F2F700E3B3E3 /* PBXTargetDependency */,
 			);
 			name = EvolverExample;
 			productName = EvolverExample;
@@ -268,6 +294,11 @@
 			target = E7BB752E1F92EC9000E3B3E3 /* EvolverExample */;
 			targetProxy = E7BB75441F92EC9000E3B3E3 /* PBXContainerItemProxy */;
 		};
+		E7BB75641F92F2F700E3B3E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Evolver;
+			targetProxy = E7BB75631F92F2F700E3B3E3 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -400,30 +431,34 @@
 		E7BB754D1F92EC9000E3B3E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DEQGLB9PU4;
 				INFOPLIST_FILE = EvolverExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.natmark.EvolverExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		E7BB754E1F92EC9000E3B3E3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DEQGLB9PU4;
 				INFOPLIST_FILE = EvolverExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.natmark.EvolverExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

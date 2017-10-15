@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import Evolver
+
+enum Direction: Int, Countable {
+    case left
+    case right
+    case up
+    case down
+}
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        print(Counter(Direction.self).count)
     }
 
     override func didReceiveMemoryWarning() {

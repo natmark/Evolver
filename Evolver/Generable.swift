@@ -1,5 +1,5 @@
 //
-//  Evolver.swift
+//  Generable.swift
 //  Evolver
 //
 //  Created by AtsuyaSato on 2017/10/15.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-public class Evolver {
+public protocol Generable {
 
 }

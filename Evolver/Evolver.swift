@@ -8,20 +8,35 @@
 
 import Foundation
 
+public enum Result<T> {
+    case success(T)
+    case failure(Error)
+}
+
 public class Evolver {
-    public class func run<T: Generable>(geneType: T.Type, max generation: Int, per size: Int, completion: (_ model: T,_ generation: Int) -> Int) -> T? {
+    public class func run<T: Generable>(geneType: T.Type, max generation: Int, per size: Int, completion: (_ model: T,_ generation: Int) -> Int) -> Result<T> {
+        // MARK: check template
+        let geneTemplate = geneType.init()
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(geneTemplate)
+        guard let parameters = ((try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }) else {
+            return .failure(EvolverError.encodeError)
+        }
+        for child in Mirror(reflecting: geneTemplate).children {
+            print(child.label!)
+            print((parameters[child.label!] as! [String: Int])["geneType"]!)
+        }
 
-        print(geneType.init())
-
+        // MARK: generate model
         let decoder = JSONDecoder()
         let jsonString =
 """
 {
     \"direction\": {
-        \"geneType\" : 12
+        \"geneType\" : \(1)
     },
-    \"distinct\": {
-        \"gene\" : 80
+    \"compass\": {
+        \"geneType\" : \(2)
     }
 }
 """
@@ -32,7 +47,6 @@ public class Evolver {
         for child in mirror.children {
             print(child.label!)
             print(child.value)
-            // print(Counter(type(of: child.value)))
         }
 
 //        do {
@@ -43,6 +57,10 @@ public class Evolver {
 //        seed.setValue(3, forKey: child.label!)
 //        seed.value(forKey: "direction")
 
-        return gene
+        return .success(gene)
+    }
+
+    enum EvolverError: Error {
+        case encodeError
     }
 }

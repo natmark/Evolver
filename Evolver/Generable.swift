@@ -8,32 +8,28 @@
 
 import Foundation
 
-public protocol Generable: Decodable {
+public protocol Generable: Codable {
     init()
 }
 
-public protocol GeneBase: Decodable, Countable {
+public protocol GeneBase: Codable, Countable {
 }
 
-public enum GeneType<T: GeneBase>: Decodable {
+public enum GeneType<T: GeneBase>: Codable {
     case geneType(T.Type, geneSize: Int)
-    case gene(geneSize: Int)
+}
 
-    private enum CodingKeys: String, CodingKey {
-        case geneType
-        case gene
-    }
-
-    enum PostTypeCodingError: Error {
-        case decoding(String)
+extension GeneType {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+        case .geneType(_, let size):
+            try container.encode(size, forKey: .geneType)
+        }
     }
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        if let value = try? values.decode(Int.self, forKey: .gene) {
-            self = .gene(geneSize: value)
-            return
-        }
 
         if let value = try? values.decode(Int.self, forKey: .geneType) {
             self = GeneType.geneType(T.self, geneSize: value)
@@ -43,8 +39,23 @@ public enum GeneType<T: GeneBase>: Decodable {
         throw DecodeError.noRecognizedContent
     }
 
+    private enum CodingKeys: String, CodingKey {
+        case geneType
+    }
+
+    enum PostTypeCodingError: Error {
+        case decoding(String)
+    }
+
+    public func value() -> T {
+        switch self {
+        case .geneType(_, let size):
+            let rawValue = Int(arc4random()) % size
+            return T(rawValue: rawValue)!
+        }
+    }
+
     enum DecodeError: Error {
         case noRecognizedContent
     }
 }
-

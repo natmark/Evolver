@@ -20,13 +20,22 @@ struct Player: Generable {
     let direction: Direction = .up
 }
 
+class PlayerGenom: GenomObject {
+    @objc dynamic var direction: Int = Direction.up.rawValue
+    @objc dynamic var dictionary = ["key": "value"]
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(Counter(Direction.self).count)
-        _ = Evolver.run(geneType: Player.self, max: 10, per: 10, completion: { model, general in
+//        print(Counter(Direction.self).count)
+//        _ = Evolver.run(geneType: Player.self, max: 10, per: 10, completion: { model, general in
+//            return 0
+//        })
+
+        _ = Evolver.run(geneType: PlayerGenom.self, max: 10, per: 10, completion: { model, general in
             return 0
         })
     }
@@ -36,6 +45,4 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
 }
-

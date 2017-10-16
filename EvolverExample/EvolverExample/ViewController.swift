@@ -9,7 +9,7 @@
 import UIKit
 import Evolver
 
-enum Direction: Int, Countable {
+enum Direction: Int, GeneBase {
     case left
     case right
     case up
@@ -17,25 +17,16 @@ enum Direction: Int, Countable {
 }
 
 struct Player: Generable {
-    let direction: Direction = .up
-}
-
-class PlayerGenom: GenomObject {
-    @objc dynamic var direction: Int = Direction.up.rawValue
-    @objc dynamic var dictionary = ["key": "value"]
+    var direction = GeneType<Direction>.geneType(Direction.self, geneSize: Counter(Direction.self).count)
+    var distinct = GeneType<Direction>.geneType(Direction.self, geneSize: Counter(Direction.self).count)
 }
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-//        print(Counter(Direction.self).count)
-//        _ = Evolver.run(geneType: Player.self, max: 10, per: 10, completion: { model, general in
-//            return 0
-//        })
 
-        _ = Evolver.run(geneType: PlayerGenom.self, max: 10, per: 10, completion: { model, general in
+        _ = Evolver.run(geneType: Player.self, max: 10, per: 10, completion: { model, general in
             return 0
         })
     }

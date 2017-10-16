@@ -8,18 +8,43 @@
 
 import Foundation
 
-public protocol Generable {
+public protocol Generable: Decodable {
     init()
 }
 
-public enum GeneType <T: Countable>{
-    case gene(Int)
-    case array(Int, Int)
-    case enums(T.Type, Int)
+public protocol GeneBase: Decodable, Countable {
 }
 
-open class GenomObject: NSObject {
-    public required override init(){
+public enum GeneType<T: GeneBase>: Decodable {
+    case geneType(T.Type, geneSize: Int)
+    case gene(geneSize: Int)
 
+    private enum CodingKeys: String, CodingKey {
+        case geneType
+        case gene
+    }
+
+    enum PostTypeCodingError: Error {
+        case decoding(String)
+    }
+
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        if let value = try? values.decode(Int.self, forKey: .gene) {
+            self = .gene(geneSize: value)
+            return
+        }
+
+        if let value = try? values.decode(Int.self, forKey: .geneType) {
+            self = GeneType.geneType(T.self, geneSize: value)
+            return
+        }
+
+        throw DecodeError.noRecognizedContent
+    }
+
+    enum DecodeError: Error {
+        case noRecognizedContent
     }
 }
+

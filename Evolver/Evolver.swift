@@ -9,18 +9,40 @@
 import Foundation
 
 public class Evolver {
-    public class func run<T: GenomObject>(geneType: T.Type, max generation: Int, per size: Int, completion: (_ model: T,_ generation: Int) -> Int) -> T {
+    public class func run<T: Generable>(geneType: T.Type, max generation: Int, per size: Int, completion: (_ model: T,_ generation: Int) -> Int) -> T? {
 
-        let obj = geneType.init()
-        let mirror = Mirror(reflecting: obj)
+        print(geneType.init())
+
+        let decoder = JSONDecoder()
+        let jsonString =
+"""
+{
+    \"direction\": {
+        \"geneType\" : 12
+    },
+    \"distinct\": {
+        \"gene\" : 80
+    }
+}
+"""
+
+        let jsonData = jsonString.data(using: .utf8)!
+        let gene = try! decoder.decode(T.self, from: jsonData)
+        let mirror = Mirror(reflecting: gene)
         for child in mirror.children {
             print(child.label!)
             print(child.value)
-            print(type(of: child.value))
+            // print(Counter(type(of: child.value)))
         }
+
+//        do {
+//            obj = try decoder.decode(T.self, from: jsonData)
+//        } catch {
+//            print("json convert failed in JSONDecoder", error.localizedDescription)
+//        }
 //        seed.setValue(3, forKey: child.label!)
 //        seed.value(forKey: "direction")
 
-        return obj
+        return gene
     }
 }

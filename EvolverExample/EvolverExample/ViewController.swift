@@ -24,8 +24,14 @@ enum Compass: Int, GeneBase {
 }
 
 struct Player: Generable {
-    var direction = GeneType.geneType(Direction.self, geneSize: Counter(Direction.self).count)
-    var compass = GeneType.geneType(Compass.self, geneSize: Counter(Compass.self).count)
+    var direction = Array(
+        repeating: GeneType.geneType(Direction.self, geneSize: Counter(Direction.self).count),
+        count: 1
+    )
+    var compass = Array(
+        repeating: GeneType.geneType(Compass.self, geneSize: Counter(Compass.self).count),
+        count: 5
+    )
 }
 
 class ViewController: UIViewController {
@@ -38,7 +44,7 @@ class ViewController: UIViewController {
         })
         switch result {
             case .success(let p):
-                print(p.direction.value())
+                print(p.direction[0].value())
             case .failure(let error):
                 print(error)
         }

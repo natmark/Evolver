@@ -17,6 +17,7 @@ public class Evolver {
     public class func run<T: Generable>(geneType: T.Type, max generation: Int, per size: Int, completion: (_ model: T,_ generation: Int) -> Int) -> Result<T> {
         // MARK: check template
         let geneTemplate = geneType.init()
+
         let encoder = JSONEncoder()
         let data = try! encoder.encode(geneTemplate)
         guard let parameters = ((try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }) else {
@@ -24,7 +25,12 @@ public class Evolver {
         }
         for child in Mirror(reflecting: geneTemplate).children {
             print(child.label!)
-            print((parameters[child.label!] as! [String: Int])["geneType"]!)
+            print(child.value)
+            // print((parameters[child.label!] as! [String: Int])["geneType"]!)
+            let geneTypeArray = parameters[child.label!] as! Array<Dictionary<String, Int>>
+            for dictionary in geneTypeArray {
+                print(dictionary["geneType"]!)
+            }
         }
 
         // MARK: generate model
@@ -32,12 +38,28 @@ public class Evolver {
         let jsonString =
 """
 {
-    \"direction\": {
+    \"direction\": [
+        {
         \"geneType\" : \(1)
-    },
-    \"compass\": {
+        }
+    ],
+    \"compass\": [
+        {
         \"geneType\" : \(2)
-    }
+        },
+        {
+        \"geneType\" : \(1)
+        },
+        {
+        \"geneType\" : \(1)
+        },
+        {
+        \"geneType\" : \(1)
+        },
+        {
+        \"geneType\" : \(1)
+        }
+    ]
 }
 """
 

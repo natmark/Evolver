@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E78559771F960A0E00EB9339 /* Gene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78559761F960A0E00EB9339 /* Gene.swift */; };
+		E78559791F960A3000EB9339 /* Genom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78559781F960A3000EB9339 /* Genom.swift */; };
+		E785597E1F961CE300EB9339 /* GemomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E785597D1F961CE300EB9339 /* GemomTests.swift */; };
 		E7BB75121F92E65900E3B3E3 /* Evolver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BB75081F92E65900E3B3E3 /* Evolver.framework */; };
 		E7BB75171F92E65900E3B3E3 /* EvolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB75161F92E65900E3B3E3 /* EvolverTests.swift */; };
 		E7BB75191F92E65900E3B3E3 /* Evolver.h in Headers */ = {isa = PBXBuildFile; fileRef = E7BB750B1F92E65900E3B3E3 /* Evolver.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,6 +29,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E78559761F960A0E00EB9339 /* Gene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gene.swift; sourceTree = "<group>"; };
+		E78559781F960A3000EB9339 /* Genom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genom.swift; sourceTree = "<group>"; };
+		E785597D1F961CE300EB9339 /* GemomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemomTests.swift; sourceTree = "<group>"; };
 		E7BB75081F92E65900E3B3E3 /* Evolver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Evolver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7BB750B1F92E65900E3B3E3 /* Evolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Evolver.h; sourceTree = "<group>"; };
 		E7BB750C1F92E65900E3B3E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,6 +87,8 @@
 				E7BB75221F92E96000E3B3E3 /* Coutable.swift */,
 				E7BB75241F92EB4600E3B3E3 /* Evolver.swift */,
 				E7BB75661F92FBC800E3B3E3 /* Generable.swift */,
+				E78559761F960A0E00EB9339 /* Gene.swift */,
+				E78559781F960A3000EB9339 /* Genom.swift */,
 				E7BB750C1F92E65900E3B3E3 /* Info.plist */,
 			);
 			path = Evolver;
@@ -90,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				E7BB75161F92E65900E3B3E3 /* EvolverTests.swift */,
+				E785597D1F961CE300EB9339 /* GemomTests.swift */,
 				E7BB75181F92E65900E3B3E3 /* Info.plist */,
 			);
 			path = EvolverTests;
@@ -206,7 +215,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E78559771F960A0E00EB9339 /* Gene.swift in Sources */,
 				E7BB75671F92FBC800E3B3E3 /* Generable.swift in Sources */,
+				E78559791F960A3000EB9339 /* Genom.swift in Sources */,
 				E7BB75231F92E96000E3B3E3 /* Coutable.swift in Sources */,
 				E7BB75251F92EB4600E3B3E3 /* Evolver.swift in Sources */,
 			);
@@ -217,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7BB75171F92E65900E3B3E3 /* EvolverTests.swift in Sources */,
+				E785597E1F961CE300EB9339 /* GemomTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

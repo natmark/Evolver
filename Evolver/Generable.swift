@@ -8,6 +8,6 @@
 
 import Foundation
 
-public protocol Generable {
-
+public protocol Generable: Codable {
+    init()
 }

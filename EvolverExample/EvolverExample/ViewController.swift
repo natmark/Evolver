@@ -25,11 +25,11 @@ enum Compass: Int, GeneBase {
 
 struct Player: Generable {
     var direction = Array(
-        repeating: Genom.template(Direction.self, geneSize: Counter(Direction.self).count),
+        repeating: Gene.template(Direction.self, geneSize: Counter(Direction.self).count),
         count: 1
     )
     var compass = Array(
-        repeating: Genom.template(Compass.self, geneSize: Counter(Compass.self).count),
+        repeating: Gene.template(Compass.self, geneSize: Counter(Compass.self).count),
         count: 5
     )
 }

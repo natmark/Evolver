@@ -15,12 +15,12 @@ public protocol Generable: Codable {
 public protocol GeneBase: Codable, Countable {
 }
 
-public enum Genom<T: GeneBase>: Codable {
+public enum Gene<T: GeneBase>: Codable {
     case template(T.Type, geneSize: Int)
     case result(T.Type, geneSize: Int, value: Int)
 }
 
-extension Genom {
+extension Gene {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
@@ -39,7 +39,7 @@ extension Genom {
         guard let value = try? values.decode(Int.self, forKey: .value) else {
             throw DecodeError.noRecognizedContent
         }
-        self = Genom.result(T.self, geneSize: geneSize, value: value)
+        self = Gene.result(T.self, geneSize: geneSize, value: value)
     }
 
     private enum CodingKeys: String, CodingKey {

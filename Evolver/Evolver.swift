@@ -14,9 +14,9 @@ public enum Result<T> {
 }
 
 public class Evolver {
-    public class func run<T: Generable>(template: T.Type, generations: Int, individuals: Int, completion: (_ model: T,_ generation: Int) -> Int) -> Result<T> {
+    public class func run<T: Generable>(template: T.Type, generations: Int, individuals: Int, completion: (_ model: T,_ generation: Int,_ individual: Int) -> Int) -> Result<T> {
 
-        // MARK: check template
+        // MARK: Check template
         let geneTemplate = template.init()
 
         let encoder = JSONEncoder()
@@ -48,10 +48,60 @@ public class Evolver {
             dictionary[label] = array
         }
 
-        var model = Genom<T>(gene: dictionary)
-        model.randomize()
+        var genoms: [Genom<T>] = []
 
-        guard let gene = model.decode() else {
+        // MARK: Create initial individuals
+        for _ in 0..<individuals {
+            var model = Genom<T>(gene: dictionary)
+            model.randomize()
+            genoms.append(model)
+        }
+
+        if individuals == 1 {
+            guard let gene = genoms[0].decode() else {
+                return .failure(EvolverError.decodeError)
+            }
+            return .success(gene)
+        }
+
+        for generation in 0..<generations {
+            // MARK: Evaluate
+            for id in 0..<individuals {
+                guard let gene = genoms[id].decode() else {
+                    return .failure(EvolverError.decodeError)
+                }
+                genoms[id].score = completion(gene, generation, id)
+            }
+            // MARK: Sort
+            genoms.sort { $1.score < $0.score }
+
+            var onlyTwo = false
+            var childs = genoms.count/2
+
+            // MARK: Select
+            if genoms.count > 2 {
+                genoms = genoms.prefix(genoms.count/2).flatMap{ $0 }
+            } else if genoms.count == 2 {
+                onlyTwo = true
+            }
+
+            // MARK: Crossover & Mutation
+            while childs > 0 {
+                let pairA = Int(arc4random_uniform(UInt32(genoms.count)))
+                var pairB = Int(arc4random_uniform(UInt32(genoms.count)))
+                while pairA == pairB {
+                    pairB = Int(arc4random_uniform(UInt32(genoms.count)))
+                }
+                let child = Genom.crossover(genomA: genoms[pairA], genomB: genoms[pairB])
+                if onlyTwo {
+                    genoms = genoms.prefix(1).flatMap { $0 }
+                }
+                genoms.append(child)
+                childs -= 1
+            }
+        }
+
+        guard let gene = genoms[0].decode() else {
             return .failure(EvolverError.decodeError)
         }
 
@@ -61,5 +111,6 @@ public class Evolver {
     enum EvolverError: Error {
         case encodeError
         case decodeError
+        case individualSizeError
     }
 }

@@ -39,14 +39,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let result = Evolver.run(template: Player.self, generations: 10, individuals: 10, completion: { model, general in
-            return 0
+        let result = Evolver.run(template: Player.self, generations: 10, individuals: 10, completion: { model, generation, individual in
+            // Evaluate
+            print(generation, individual, model.compass[2].value.rawValue + model.direction[0].value.rawValue)
+            return model.compass[2].value.rawValue + model.direction[0].value.rawValue
         })
         switch result {
             case .success(let model):
-                for compass in model.compass {
-                    print(compass.value)
-                }
+                print(model.compass[2].value.rawValue + model.direction[0].value.rawValue)
             case .failure(let error):
                 print(error)
         }

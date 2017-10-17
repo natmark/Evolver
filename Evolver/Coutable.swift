@@ -18,7 +18,7 @@ public class Counter <T: Countable>: EnumCounter {
     let target: T.Type
     public var count: Int {
         var i = 1
-        while target.init(rawValue: i) != nil { i+=1 }
+        while self.target.init(rawValue: i) != nil { i+=1 }
         return i
     }
 

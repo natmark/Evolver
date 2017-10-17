@@ -14,7 +14,7 @@ public enum Result<T> {
 }
 
 public class Evolver {
-    public class func run<T: Generable>(template: T.Type, max generation: Int, per size: Int, completion: (_ model: T,_ generation: Int) -> Int) -> Result<T> {
+    public class func run<T: Generable>(template: T.Type, generations: Int, individuals: Int, completion: (_ model: T,_ generation: Int) -> Int) -> Result<T> {
 
         // MARK: check template
         let geneTemplate = template.init()
@@ -25,81 +25,41 @@ public class Evolver {
             return .failure(EvolverError.encodeError)
         }
 
+        var dictionary = [String: Array<[String : Int]>]()
         for child in Mirror(reflecting: geneTemplate).children {
+            var array = [Dictionary<String, Int>]()
+
             guard
                 let label = child.label,
                 let geneTypeArray = parameters[label] as? Array<Dictionary<String, Int>> else {
                     return .failure(EvolverError.encodeError)
             }
-            let count = geneTypeArray.count
+            let geneSize = GeneCodingKeys.geneSize.stringValue
+            let value = GeneCodingKeys.value.stringValue
 
-            print(label, count)
             for dictionary in geneTypeArray {
-                print(dictionary["geneSize"]!)
+                array.append(
+                    [
+                        geneSize: dictionary[geneSize] ?? 0,
+                        value: 0
+                    ]
+                )
             }
+            dictionary[label] = array
         }
 
-        // MARK: generate model
-        let decoder = JSONDecoder()
+        var model = Genom<T>(gene: dictionary)
+        model.randomize()
 
-        var dict = [String: Any]()
-        var array = [Dictionary<String, Int>]()
-        array.append(["geneType": 2])
-        dict["direction"] = array
-
-        let jsonString =
-"""
-{
-    \"direction\": [
-        {
-            \"geneSize\" : \(4),
-            \"value\" : \(1)
-        }
-    ],
-    \"compass\": [
-        {
-            \"geneSize\" : \(4),
-            \"value\" : \(2)
-        },
-        {
-            \"geneSize\" : \(4),
-            \"value\" : \(2)
-        },
-        {
-            \"geneSize\" : \(4),
-            \"value\" : \(2)
-        },
-        {
-            \"geneSize\" : \(4),
-            \"value\" : \(3)
-        },
-        {
-            \"geneSize\" : \(4),
-            \"value\" : \(0)
-        }
-    ]
-}
-"""
-
-        let jsonData = jsonString.data(using: .utf8)!
-        let gene = try! decoder.decode(T.self, from: jsonData)
-        let mirror = Mirror(reflecting: gene)
-        for child in mirror.children {
-            print(child.label!)
-            print(child.value)
+        guard let gene = model.decode() else {
+            return .failure(EvolverError.decodeError)
         }
 
-//        do {
-//            obj = try decoder.decode(T.self, from: jsonData)
-//        } catch {
-//            print("json convert failed in JSONDecoder", error.localizedDescription)
-//        }
-//        seed.setValue(3, forKey: child.label!)
-//        seed.value(forKey: "direction")
         return .success(gene)
     }
 
     enum EvolverError: Error {
         case encodeError
+        case decodeError
     }
 }

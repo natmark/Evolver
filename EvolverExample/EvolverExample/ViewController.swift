@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let result = Evolver.run(template: Player.self, max: 10, per: 10, completion: { model, general in
+        let result = Evolver.run(template: Player.self, generations: 10, individuals: 10, completion: { model, general in
             return 0
         })
         switch result {

@@ -34,7 +34,7 @@ extension Gene {
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: GeneCodingKeys.self)
-        guard let geneSize = try? values.decode(Int.self, forKey: .geneSize) else{
+        guard let geneSize = try? values.decode(Int.self, forKey: .geneSize) else {
             throw DecodeError.noRecognizedContent
         }
         guard let value = try? values.decode(Int.self, forKey: .value) else {
@@ -45,9 +45,9 @@ extension Gene {
 
     public var value: T {
         switch self {
-        case .template(_,_):
+        case .template(_, _):
             return T(rawValue: 1)!
-        case .result(_,_, let value):
+        case .result(_, _, let value):
             return T(rawValue: value)!
         }
     }

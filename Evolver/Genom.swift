@@ -22,7 +22,7 @@ public struct Genom<T: Generable> {
         }
     }
 
-    init(gene:  [String : Array<[String : Int]>]) {
+    init(gene: [String : Array<[String : Int]>]) {
         self.gene = gene
         for (key, array) in gene {
             let geneSizeString = GeneCodingKeys.geneSize.stringValue

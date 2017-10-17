@@ -14,7 +14,7 @@ public enum Result<T> {
 }
 
 public class Evolver {
-    public class func run<T: Generable>(template: T.Type, generations: Int, individuals: Int, completion: (_ model: T,_ generation: Int,_ individual: Int) -> Int) -> Result<T> {
+    public class func run<T: Generable>(template: T.Type, generations: Int, individuals: Int, completion: (_ model: T, _ generation: Int, _ individual: Int) -> Int) -> Result<T> {
 
         // MARK: Check template
         let geneTemplate = template.init()
@@ -80,7 +80,7 @@ public class Evolver {
 
             // MARK: Select
             if genoms.count > 2 {
-                genoms = genoms.prefix(genoms.count/2).flatMap{ $0 }
+                genoms = genoms.prefix(genoms.count/2).flatMap { $0 }
             } else if genoms.count == 2 {
                 onlyTwo = true
             }

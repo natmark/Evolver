@@ -15,6 +15,7 @@ public enum Result<T> {
 
 public class Evolver {
     public class func run<T: Generable>(geneType: T.Type, max generation: Int, per size: Int, completion: (_ model: T,_ generation: Int) -> Int) -> Result<T> {
+
         // MARK: check template
         let geneTemplate = geneType.init()
 
@@ -23,11 +24,16 @@ public class Evolver {
         guard let parameters = ((try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }) else {
             return .failure(EvolverError.encodeError)
         }
+
         for child in Mirror(reflecting: geneTemplate).children {
-            print(child.label!)
-            print(child.value)
-            // print((parameters[child.label!] as! [String: Int])["geneType"]!)
-            let geneTypeArray = parameters[child.label!] as! Array<Dictionary<String, Int>>
+            guard
+                let label = child.label,
+                let geneTypeArray = parameters[label] as? Array<Dictionary<String, Int>> else {
+                    return .failure(EvolverError.encodeError)
+            }
+            let count = geneTypeArray.count
+
+            print(label, count)
             for dictionary in geneTypeArray {
                 print(dictionary["geneType"]!)
             }
@@ -35,6 +41,12 @@ public class Evolver {
 
         // MARK: generate model
         let decoder = JSONDecoder()
+
+        var dict = [String: Any]()
+        var array = [Dictionary<String, Int>]()
+        array.append(["geneType": 2])
+        dict["direction"] = array
+
         let jsonString =
 """
 {
@@ -78,7 +90,6 @@ public class Evolver {
 //        }
 //        seed.setValue(3, forKey: child.label!)
 //        seed.value(forKey: "direction")
-
         return .success(gene)
     }
 

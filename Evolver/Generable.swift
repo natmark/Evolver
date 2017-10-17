@@ -30,7 +30,6 @@ extension GeneType {
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-
         if let value = try? values.decode(Int.self, forKey: .geneType) {
             self = GeneType.geneType(T.self, geneSize: value)
             return
@@ -47,11 +46,10 @@ extension GeneType {
         case decoding(String)
     }
 
-    public func value() -> T {
+    public var value: T {
         switch self {
         case .geneType(_, let size):
-            let rawValue = Int(arc4random()) % size
-            return T(rawValue: rawValue)!
+            return T(rawValue: size)!
         }
     }
 

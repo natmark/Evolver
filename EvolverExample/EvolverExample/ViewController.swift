@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         })
         switch result {
             case .success(let p):
-                print(p.direction[0].value())
+                print(p.direction[0].value)
             case .failure(let error):
                 print(error)
         }

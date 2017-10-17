@@ -42,10 +42,6 @@ extension GeneType {
         case geneType
     }
 
-    enum PostTypeCodingError: Error {
-        case decoding(String)
-    }
-
     public var value: T {
         switch self {
         case .geneType(_, let size):

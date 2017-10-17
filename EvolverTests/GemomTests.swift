@@ -35,4 +35,31 @@ class GemomTests: XCTestCase {
         XCTAssertEqual(GenomEngine.binaryDigit(n: 64), 6)
         XCTAssertEqual(GenomEngine.binaryDigit(n: 65), 7)
     }
+
+    func testOnePointCrossover() {
+        XCTAssertEqual(
+            GenomEngine.onePointCrossover(
+                chromosomeA: "01110",
+                chromosomeB: "11001",
+                point: 3
+            ),
+            "01101"
+        )
+        XCTAssertEqual(
+            GenomEngine.onePointCrossover(
+                chromosomeA: "01110101",
+                chromosomeB: "11001010",
+                point: 0
+            ),
+            "11001010"
+        )
+        XCTAssertEqual(
+            GenomEngine.onePointCrossover(
+                chromosomeA: "01",
+                chromosomeB: "11",
+                point: 2
+            ),
+            "01"
+        )
+    }
 }

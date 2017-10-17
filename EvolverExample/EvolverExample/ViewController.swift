@@ -25,11 +25,11 @@ enum Compass: Int, GeneBase {
 
 struct Player: Generable {
     var direction = Array(
-        repeating: GeneType.geneType(Direction.self, geneSize: Counter(Direction.self).count),
+        repeating: Genom.template(Direction.self, geneSize: Counter(Direction.self).count),
         count: 1
     )
     var compass = Array(
-        repeating: GeneType.geneType(Compass.self, geneSize: Counter(Compass.self).count),
+        repeating: Genom.template(Compass.self, geneSize: Counter(Compass.self).count),
         count: 5
     )
 }
@@ -39,12 +39,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let result = Evolver.run(geneType: Player.self, max: 10, per: 10, completion: { model, general in
+        let result = Evolver.run(template: Player.self, max: 10, per: 10, completion: { model, general in
             return 0
         })
         switch result {
-            case .success(let p):
-                print(p.direction[0].value)
+            case .success(let model):
+                for compass in model.compass {
+                    print(compass.value)
+                }
             case .failure(let error):
                 print(error)
         }

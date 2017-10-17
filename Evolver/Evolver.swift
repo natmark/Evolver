@@ -14,10 +14,10 @@ public enum Result<T> {
 }
 
 public class Evolver {
-    public class func run<T: Generable>(geneType: T.Type, max generation: Int, per size: Int, completion: (_ model: T,_ generation: Int) -> Int) -> Result<T> {
+    public class func run<T: Generable>(template: T.Type, max generation: Int, per size: Int, completion: (_ model: T,_ generation: Int) -> Int) -> Result<T> {
 
         // MARK: check template
-        let geneTemplate = geneType.init()
+        let geneTemplate = template.init()
 
         let encoder = JSONEncoder()
         let data = try! encoder.encode(geneTemplate)
@@ -52,24 +52,30 @@ public class Evolver {
 {
     \"direction\": [
         {
-        \"geneType\" : \(1)
+            \"geneSize\" : \(4),
+            \"value\" : \(1)
         }
     ],
     \"compass\": [
         {
-        \"geneType\" : \(2)
+            \"geneSize\" : \(4),
+            \"value\" : \(2)
         },
         {
-        \"geneType\" : \(1)
+            \"geneSize\" : \(4),
+            \"value\" : \(2)
         },
         {
-        \"geneType\" : \(1)
+            \"geneSize\" : \(4),
+            \"value\" : \(2)
         },
         {
-        \"geneType\" : \(1)
+            \"geneSize\" : \(4),
+            \"value\" : \(3)
         },
         {
-        \"geneType\" : \(1)
+            \"geneSize\" : \(4),
+            \"value\" : \(0)
         }
     ]
 }

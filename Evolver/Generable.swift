@@ -25,7 +25,7 @@ extension Genom {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
         case .template(_, let size):
-            try container.encode(size, forKey: .geneType)
+            try container.encode(size, forKey: .geneSize)
         case .result:
             throw DecodeError.noRecognizedContent
         }
@@ -43,7 +43,6 @@ extension Genom {
     }
 
     private enum CodingKeys: String, CodingKey {
-        case geneType
         case geneSize
         case value
     }

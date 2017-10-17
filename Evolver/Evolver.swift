@@ -35,7 +35,7 @@ public class Evolver {
 
             print(label, count)
             for dictionary in geneTypeArray {
-                print(dictionary["geneType"]!)
+                print(dictionary["geneSize"]!)
             }
         }
 

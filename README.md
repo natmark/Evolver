@@ -23,7 +23,7 @@
 </p>
 
 # Evolver
-Evolver is a Genetic Algorithm library for Swift.
+Evolver is a Genetic Algorithm library for Swift🐧.
 
 ## Usage
 The main units of Evolver are `Generable` protocol and `Evolver` class.

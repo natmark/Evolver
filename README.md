@@ -13,6 +13,9 @@
         <img src="https://img.shields.io/cocoapods/p/ProcessingKit.svg?style=flat"
              alt="Platforms">
     </a>
+    <a href="https://github.com/apple/swift">
+        <img alt="Swift" src="https://img.shields.io/badge/swift-4.0-orange.svg">
+    </a>
     <a href="https://github.com/Carthage/Carthage">
         <img src="https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat"
              alt="Carthage Compatible">

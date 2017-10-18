@@ -81,7 +81,7 @@ case .failure(let error):
 `Evolver` is simulating on main thread default.
 Use `DispatchQueue` if you want to running on sub thread.
 
-```
+```Swift
 DispatchQueue.global(qos: .userInitiated).async {
     let result = Evolver.run(template: Player.self,
                             generations: 20,

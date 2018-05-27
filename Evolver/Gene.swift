@@ -9,6 +9,15 @@
 import Foundation
 
 public protocol GeneBase: Codable, Countable {
+    static func count() -> Int
+}
+
+extension GeneBase {
+    public static func count() -> Int {
+        var i = 1
+        while self.init(rawValue: i) != nil { i+=1 }
+        return i
+    }
 }
 
 public enum Gene<T: GeneBase>: Codable {

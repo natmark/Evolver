@@ -9,20 +9,3 @@
 public protocol Countable {
     init?(rawValue: Int)
 }
-
-public protocol EnumCounter {
-    var count: Int { get }
-}
-
-public class Counter <T: Countable>: EnumCounter {
-    let target: T.Type
-    public var count: Int {
-        var i = 1
-        while self.target.init(rawValue: i) != nil { i+=1 }
-        return i
-    }
-
-    public init(_ target: T.Type) {
-        self.target = target
-    }
-}

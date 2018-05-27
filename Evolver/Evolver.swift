@@ -14,7 +14,8 @@ public enum Result<T> {
 }
 
 public class Evolver {
-    // swiftlint:disable cyclomatic_complexity
+    public static let crossing: Crossingable = Elite()
+
     public class func run<T: Generable>(template: T.Type, generations: Int, individuals: Int, completion: (_ model: T, _ generation: Int, _ individual: Int) -> Int) -> Result<T> {
         guard let dictionary = try? Evolver.checkTemplate(template: template) else {
             return .failure(EvolverError.encodeError)
@@ -38,20 +39,14 @@ public class Evolver {
                 }
                 genoms[id].score = completion(gene, generation, id)
             }
-            // MARK: Sort
-            genoms.sort { $1.score < $0.score }
 
-            var onlyTwo = false
+            let onlyTwo = (genoms.prefix(genoms.count/2).compactMap { $0 }.count == 2)
             var childs = genoms.count/2
 
-            // MARK: Select
-            if genoms.count > 2 {
-                genoms = genoms.prefix(genoms.count/2).compactMap { $0 }
-            } else if genoms.count == 2 {
-                onlyTwo = true
-            }
+            // MARK: Choice
+            crossing.crossing(genoms: &genoms)
 
-            // MARK: Crossover & Mutation
+            // MARK: Crossing & Mutation
             while childs > 0 {
                 let pairA = Int(arc4random_uniform(UInt32(genoms.count)))
                 var pairB = Int(arc4random_uniform(UInt32(genoms.count)))

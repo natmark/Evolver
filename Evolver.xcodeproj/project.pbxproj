@@ -10,6 +10,10 @@
 		E78559771F960A0E00EB9339 /* Gene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78559761F960A0E00EB9339 /* Gene.swift */; };
 		E78559791F960A3000EB9339 /* Genom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78559781F960A3000EB9339 /* Genom.swift */; };
 		E785597E1F961CE300EB9339 /* GemomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E785597D1F961CE300EB9339 /* GemomTests.swift */; };
+		E7B01BEF20BAA62600E388D1 /* Crossingable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B01BEE20BAA62600E388D1 /* Crossingable.swift */; };
+		E7B01BF120BAA64300E388D1 /* Choiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B01BF020BAA64300E388D1 /* Choiceable.swift */; };
+		E7B01BF320BAA68900E388D1 /* Mutationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B01BF220BAA68900E388D1 /* Mutationable.swift */; };
+		E7B01BF620BAA77F00E388D1 /* Elite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B01BF520BAA77F00E388D1 /* Elite.swift */; };
 		E7BB75121F92E65900E3B3E3 /* Evolver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BB75081F92E65900E3B3E3 /* Evolver.framework */; };
 		E7BB75171F92E65900E3B3E3 /* EvolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB75161F92E65900E3B3E3 /* EvolverTests.swift */; };
 		E7BB75191F92E65900E3B3E3 /* Evolver.h in Headers */ = {isa = PBXBuildFile; fileRef = E7BB750B1F92E65900E3B3E3 /* Evolver.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -32,6 +36,10 @@
 		E78559761F960A0E00EB9339 /* Gene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gene.swift; sourceTree = "<group>"; };
 		E78559781F960A3000EB9339 /* Genom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genom.swift; sourceTree = "<group>"; };
 		E785597D1F961CE300EB9339 /* GemomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemomTests.swift; sourceTree = "<group>"; };
+		E7B01BEE20BAA62600E388D1 /* Crossingable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crossingable.swift; sourceTree = "<group>"; };
+		E7B01BF020BAA64300E388D1 /* Choiceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choiceable.swift; sourceTree = "<group>"; };
+		E7B01BF220BAA68900E388D1 /* Mutationable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutationable.swift; sourceTree = "<group>"; };
+		E7B01BF520BAA77F00E388D1 /* Elite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elite.swift; sourceTree = "<group>"; };
 		E7BB75081F92E65900E3B3E3 /* Evolver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Evolver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7BB750B1F92E65900E3B3E3 /* Evolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Evolver.h; sourceTree = "<group>"; };
 		E7BB750C1F92E65900E3B3E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,6 +70,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E7B01BEA20BAA5DC00E388D1 /* Choice */ = {
+			isa = PBXGroup;
+			children = (
+				E7B01BF020BAA64300E388D1 /* Choiceable.swift */,
+			);
+			path = Choice;
+			sourceTree = "<group>";
+		};
+		E7B01BEB20BAA5EC00E388D1 /* Crossing */ = {
+			isa = PBXGroup;
+			children = (
+				E7B01BEE20BAA62600E388D1 /* Crossingable.swift */,
+				E7B01BF520BAA77F00E388D1 /* Elite.swift */,
+			);
+			path = Crossing;
+			sourceTree = "<group>";
+		};
+		E7B01BEC20BAA60A00E388D1 /* Mutation */ = {
+			isa = PBXGroup;
+			children = (
+				E7B01BF220BAA68900E388D1 /* Mutationable.swift */,
+			);
+			path = Mutation;
+			sourceTree = "<group>";
+		};
 		E7BB74FE1F92E65900E3B3E3 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +119,9 @@
 				E7BB750B1F92E65900E3B3E3 /* Evolver.h */,
 				E7BB75221F92E96000E3B3E3 /* Coutable.swift */,
 				E7BB75241F92EB4600E3B3E3 /* Evolver.swift */,
+				E7B01BEB20BAA5EC00E388D1 /* Crossing */,
+				E7B01BEA20BAA5DC00E388D1 /* Choice */,
+				E7B01BEC20BAA60A00E388D1 /* Mutation */,
 				E7BB75661F92FBC800E3B3E3 /* Generable.swift */,
 				E78559761F960A0E00EB9339 /* Gene.swift */,
 				E78559781F960A3000EB9339 /* Genom.swift */,
@@ -234,10 +270,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E78559771F960A0E00EB9339 /* Gene.swift in Sources */,
+				E7B01BF620BAA77F00E388D1 /* Elite.swift in Sources */,
 				E7BB75671F92FBC800E3B3E3 /* Generable.swift in Sources */,
+				E7B01BF320BAA68900E388D1 /* Mutationable.swift in Sources */,
+				E7B01BF120BAA64300E388D1 /* Choiceable.swift in Sources */,
 				E78559791F960A3000EB9339 /* Genom.swift in Sources */,
 				E7BB75231F92E96000E3B3E3 /* Coutable.swift in Sources */,
 				E7BB75251F92EB4600E3B3E3 /* Evolver.swift in Sources */,
+				E7B01BEF20BAA62600E388D1 /* Crossingable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

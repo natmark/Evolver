@@ -80,7 +80,7 @@ public class Evolver {
 
             // MARK: Select
             if genoms.count > 2 {
-                genoms = genoms.prefix(genoms.count/2).flatMap { $0 }
+                genoms = genoms.prefix(genoms.count/2).compactMap { $0 }
             } else if genoms.count == 2 {
                 onlyTwo = true
             }

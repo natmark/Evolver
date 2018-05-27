@@ -14,6 +14,7 @@ public enum Result<T> {
 }
 
 public class Evolver {
+    // swiftlint:disable cyclomatic_complexity
     public class func run<T: Generable>(template: T.Type, generations: Int, individuals: Int, completion: (_ model: T, _ generation: Int, _ individual: Int) -> Int) -> Result<T> {
         guard let dictionary = try? Evolver.checkTemplate(template: template) else {
             return .failure(EvolverError.encodeError)
@@ -73,7 +74,7 @@ public class Evolver {
         return .success(gene)
     }
 
-    private class func checkTemplate<T: Generable>(template: T.Type) throws -> [String: Array<[String : Int]>] {
+    private class func checkTemplate<T: Generable>(template: T.Type) throws -> [String: [[String: Int]]] {
         let geneTemplate = template.init()
 
         let encoder = JSONEncoder()
@@ -82,13 +83,13 @@ public class Evolver {
             throw EvolverError.encodeError
         }
 
-        var dictionary = [String: Array<[String : Int]>]()
+        var dictionary = [String: [[String: Int]]]()
         for child in Mirror(reflecting: geneTemplate).children {
-            var array = [Dictionary<String, Int>]()
+            var array = [[String: Int]]()
 
             guard
                 let label = child.label,
-                let geneTypeArray = parameters[label] as? Array<Dictionary<String, Int>> else {
+            let geneTypeArray = parameters[label] as? [[String: Int]] else {
                     throw EvolverError.encodeError
             }
 
@@ -109,7 +110,7 @@ public class Evolver {
         return dictionary
     }
 
-    private class func createInitialIndividuals<T: Generable>(_ : T.Type, dictionary: [String: Array<[String : Int]>], individuals: Int) -> [Genom<T>] {
+    private class func createInitialIndividuals<T: Generable>(_ : T.Type, dictionary: [String: [[String: Int]]], individuals: Int) -> [Genom<T>] {
         var genoms: [Genom<T>] = []
 
         for _ in 0 ..< individuals {

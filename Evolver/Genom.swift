@@ -12,17 +12,15 @@ public struct Genom<T: Generable> {
     private var geneSizes: [Int] = []
     private var geneSequence: [String] = []
     private var geneValues: [Int] = []
-    var gene: [String: Array<[String: Int]>]
+    var gene: [String: [[String: Int]]]
     var score: Int = 0
     var mutationRate: Float = 0.05
 
     var chromosome: String {
-        get {
-            return self.geneSequence.joined()
-        }
+        return self.geneSequence.joined()
     }
 
-    init(gene: [String : Array<[String : Int]>]) {
+    init(gene: [String: [[String: Int]]]) {
         self.gene = gene
         for (key, array) in gene {
             let geneSizeString = GeneCodingKeys.geneSize.stringValue
@@ -49,7 +47,7 @@ public struct Genom<T: Generable> {
         var index = 0
         for (key, array) in self.gene {
             let valueString = GeneCodingKeys.value.stringValue
-            for (i, _) in array.enumerated() {
+            for (i) in array.indices {
                 self.gene[key]?[i][valueString] = value[index]
                 index += 1
             }
@@ -76,7 +74,7 @@ public struct Genom<T: Generable> {
             let value = self.geneValues[i]
             let geneSize = self.geneSizes[i]
 
-            var binaryString = String(value, radix:2)
+            var binaryString = String(value, radix: 2)
             var shortage = GenomEngine.binaryDigit(n: geneSize) - binaryString.count
             while shortage > 0 {
                 shortage -= 1
@@ -150,8 +148,9 @@ public class GenomEngine {
         var n = Double(n - 1)
         var digit = 0
 
-        while ( n >= 1 ) {
-            n = n / 2
+        //swiftlint:disable control_statement
+        while (n >= 1) {
+            n /= 2
             digit += 1
         }
         return digit

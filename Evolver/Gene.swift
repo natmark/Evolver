@@ -54,7 +54,7 @@ extension Gene {
 
     public var value: T {
         switch self {
-        case .template(_, _):
+        case .template:
             return T(rawValue: 1)!
         case .result(_, _, let value):
             return T(rawValue: value)!

@@ -77,7 +77,7 @@ public struct Genom<T: Generable> {
             let geneSize = self.geneSizes[i]
 
             var binaryString = String(value, radix:2)
-            var shortage = GenomEngine.binaryDigit(n: geneSize) - binaryString.characters.count
+            var shortage = GenomEngine.binaryDigit(n: geneSize) - binaryString.count
             while shortage > 0 {
                 shortage -= 1
                 binaryString = "0" + binaryString
@@ -102,7 +102,7 @@ public struct Genom<T: Generable> {
         var chromosome = GenomEngine.onePointCrossover(
             chromosomeA: genomA.chromosome,
             chromosomeB: genomB.chromosome,
-            point: Int(arc4random_uniform(UInt32(genomA.chromosome.characters.count)))
+            point: Int(arc4random_uniform(UInt32(genomA.chromosome.count)))
         )
         // MARK: Mutation
         chromosome = Genom.mutation(chromosome: chromosome, mutationRate: genomA.mutationRate)
@@ -127,7 +127,7 @@ public class GenomEngine {
     public class func mutation(chromosome: String, mutationRate: Float) -> String {
         var result = ""
 
-        for i in 0..<chromosome.characters.count {
+        for i in 0..<chromosome.count {
             let startIndex = chromosome.index(chromosome.startIndex, offsetBy: i)
             let endIndex = chromosome.index(startIndex, offsetBy: 1)
 
@@ -158,9 +158,9 @@ public class GenomEngine {
     }
 
     public class func onePointCrossover(chromosomeA: String, chromosomeB: String, point: Int) -> String {
-        guard chromosomeA.characters.count == chromosomeB.characters.count,
+        guard chromosomeA.count == chromosomeB.count,
             point >= 0,
-            point <= chromosomeA.characters.count else {
+            point <= chromosomeA.count else {
                 return ""
         }
         let prefix = String(chromosomeA[..<chromosomeA.index(chromosomeA.startIndex, offsetBy: point)])

@@ -80,7 +80,7 @@ public class Evolver {
 
             // MARK: Select
             if genoms.count > 2 {
-                genoms = genoms.prefix(genoms.count/2).flatMap { $0 }
+                genoms = genoms.prefix(genoms.count/2).compactMap { $0 }
             } else if genoms.count == 2 {
                 onlyTwo = true
             }
@@ -94,7 +94,7 @@ public class Evolver {
                 }
                 let child = Genom.crossover(genomA: genoms[pairA], genomB: genoms[pairB])
                 if onlyTwo {
-                    genoms = genoms.prefix(1).flatMap { $0 }
+                    genoms = genoms.prefix(1).compactMap { $0 }
                 }
                 genoms.append(child)
                 childs -= 1

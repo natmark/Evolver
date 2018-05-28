@@ -18,7 +18,7 @@ enum Direction: Int, GeneBase {
 
 struct Player: Generable {
     var direction = Array(
-        repeating: Gene.template(Direction.self, geneSize: Counter(Direction.self).count),
+        repeating: Gene.template(Direction.self, geneSize: Direction.count()),
         count: 20
     )
 }

@@ -9,6 +9,15 @@
 import Foundation
 
 public protocol GeneBase: Codable, Countable {
+    static func count() -> Int
+}
+
+extension GeneBase {
+    public static func count() -> Int {
+        var i = 1
+        while self.init(rawValue: i) != nil { i+=1 }
+        return i
+    }
 }
 
 public enum Gene<T: GeneBase>: Codable {
@@ -45,7 +54,7 @@ extension Gene {
 
     public var value: T {
         switch self {
-        case .template(_, _):
+        case .template:
             return T(rawValue: 1)!
         case .result(_, _, let value):
             return T(rawValue: value)!

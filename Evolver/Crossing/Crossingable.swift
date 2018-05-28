@@ -7,5 +7,5 @@
 //
 
 public protocol Crossingable {
-    func crossing<T: Generable>(genoms: inout [Genom<T>])
+    func crossover(chromosomeA: String, chromosomeB: String) -> String
 }

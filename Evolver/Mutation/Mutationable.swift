@@ -7,5 +7,6 @@
 //
 
 public protocol Mutationable {
-    func mutate()
+    func mutate(chromosome: String) -> String
+    var mutationRate: Float { get set }
 }

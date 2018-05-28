@@ -14,7 +14,15 @@ public enum Result<T> {
 }
 
 public class Evolver {
-    public static let crossing: Crossingable = Elite()
+    public static var choice: Choiceable = Elite()
+    public static var crossing: Crossingable = OnePointCrossover()
+    public static var mutation: Mutationable = Substitution()
+
+    public enum EvolverError: Error {
+        case encodeError
+        case decodeError
+        case individualSizeError
+    }
 
     public class func run<T: Generable>(template: T.Type, generations: Int, individuals: Int, completion: (_ model: T, _ generation: Int, _ individual: Int) -> Int) -> Result<T> {
         guard let dictionary = try? Evolver.checkTemplate(template: template) else {
@@ -44,7 +52,7 @@ public class Evolver {
             var childs = genoms.count/2
 
             // MARK: Choice
-            crossing.crossing(genoms: &genoms)
+            genoms = choice.choose(genoms: genoms)
 
             // MARK: Crossing & Mutation
             while childs > 0 {
@@ -53,7 +61,8 @@ public class Evolver {
                 while pairA == pairB {
                     pairB = Int(arc4random_uniform(UInt32(genoms.count)))
                 }
-                let child = Genom.crossover(genomA: genoms[pairA], genomB: genoms[pairB])
+
+                let child = Evolver.createChildFrom(genomA: genoms[pairA], genomB: genoms[pairB])
                 if onlyTwo {
                     genoms = genoms.prefix(1).compactMap { $0 }
                 }
@@ -67,6 +76,18 @@ public class Evolver {
         }
 
         return .success(gene)
+    }
+
+    private class func createChildFrom<T: Generable>(genomA: Genom<T>, genomB: Genom<T>) -> Genom<T> {
+        // MARK: Crossover
+        var chromosome = crossing.crossover(chromosomeA: genomA.chromosome, chromosomeB: genomB.chromosome)
+
+        // MARK: Mutation
+        chromosome = mutation.mutate(chromosome: chromosome)
+
+        let child = Genom<T>(gene: genomA.gene, chromosome: chromosome)
+
+        return child
     }
 
     private class func checkTemplate<T: Generable>(template: T.Type) throws -> [String: [[String: Int]]] {
@@ -115,11 +136,5 @@ public class Evolver {
         }
 
         return genoms
-    }
-
-    enum EvolverError: Error {
-        case encodeError
-        case decodeError
-        case individualSizeError
     }
 }

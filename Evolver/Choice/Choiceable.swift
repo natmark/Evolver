@@ -7,5 +7,5 @@
 //
 
 public protocol Choiceable {
-    func choice()
+    func choose<T: Generable>(genoms: [Genom<T>]) -> [Genom<T>]
 }

@@ -8,14 +8,16 @@
 
 import Foundation
 
-struct Elite: Crossingable {
-    func crossing<T>(genoms: inout [Genom<T>]) where T: Generable {
-        // MARK: Sort
+public struct Elite: Choiceable {
+    public func choose<T: Generable>(genoms: [Genom<T>]) -> [Genom<T>] {
+        var genoms = genoms
         genoms.sort { $1.score < $0.score }
 
         // MARK: Choice
         if genoms.count > 2 {
             genoms = genoms.prefix(genoms.count/2).compactMap { $0 }
         }
+
+        return genoms
     }
 }

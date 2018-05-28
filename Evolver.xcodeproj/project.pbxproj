@@ -14,6 +14,8 @@
 		E7B01BF120BAA64300E388D1 /* Choiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B01BF020BAA64300E388D1 /* Choiceable.swift */; };
 		E7B01BF320BAA68900E388D1 /* Mutationable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B01BF220BAA68900E388D1 /* Mutationable.swift */; };
 		E7B01BF620BAA77F00E388D1 /* Elite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B01BF520BAA77F00E388D1 /* Elite.swift */; };
+		E7B01C0B20BBD46800E388D1 /* OnePointCrossover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B01C0A20BBD46800E388D1 /* OnePointCrossover.swift */; };
+		E7B01C0D20BBDAC000E388D1 /* Substitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B01C0C20BBDAC000E388D1 /* Substitution.swift */; };
 		E7BB75121F92E65900E3B3E3 /* Evolver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BB75081F92E65900E3B3E3 /* Evolver.framework */; };
 		E7BB75171F92E65900E3B3E3 /* EvolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB75161F92E65900E3B3E3 /* EvolverTests.swift */; };
 		E7BB75191F92E65900E3B3E3 /* Evolver.h in Headers */ = {isa = PBXBuildFile; fileRef = E7BB750B1F92E65900E3B3E3 /* Evolver.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,6 +42,8 @@
 		E7B01BF020BAA64300E388D1 /* Choiceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choiceable.swift; sourceTree = "<group>"; };
 		E7B01BF220BAA68900E388D1 /* Mutationable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutationable.swift; sourceTree = "<group>"; };
 		E7B01BF520BAA77F00E388D1 /* Elite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elite.swift; sourceTree = "<group>"; };
+		E7B01C0A20BBD46800E388D1 /* OnePointCrossover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePointCrossover.swift; sourceTree = "<group>"; };
+		E7B01C0C20BBDAC000E388D1 /* Substitution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Substitution.swift; sourceTree = "<group>"; };
 		E7BB75081F92E65900E3B3E3 /* Evolver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Evolver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7BB750B1F92E65900E3B3E3 /* Evolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Evolver.h; sourceTree = "<group>"; };
 		E7BB750C1F92E65900E3B3E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				E7B01BF020BAA64300E388D1 /* Choiceable.swift */,
+				E7B01BF520BAA77F00E388D1 /* Elite.swift */,
 			);
 			path = Choice;
 			sourceTree = "<group>";
@@ -82,7 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				E7B01BEE20BAA62600E388D1 /* Crossingable.swift */,
-				E7B01BF520BAA77F00E388D1 /* Elite.swift */,
+				E7B01C0A20BBD46800E388D1 /* OnePointCrossover.swift */,
 			);
 			path = Crossing;
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				E7B01BF220BAA68900E388D1 /* Mutationable.swift */,
+				E7B01C0C20BBDAC000E388D1 /* Substitution.swift */,
 			);
 			path = Mutation;
 			sourceTree = "<group>";
@@ -271,9 +277,11 @@
 			files = (
 				E78559771F960A0E00EB9339 /* Gene.swift in Sources */,
 				E7B01BF620BAA77F00E388D1 /* Elite.swift in Sources */,
+				E7B01C0B20BBD46800E388D1 /* OnePointCrossover.swift in Sources */,
 				E7BB75671F92FBC800E3B3E3 /* Generable.swift in Sources */,
 				E7B01BF320BAA68900E388D1 /* Mutationable.swift in Sources */,
 				E7B01BF120BAA64300E388D1 /* Choiceable.swift in Sources */,
+				E7B01C0D20BBDAC000E388D1 /* Substitution.swift in Sources */,
 				E78559791F960A3000EB9339 /* Genom.swift in Sources */,
 				E7BB75231F92E96000E3B3E3 /* Coutable.swift in Sources */,
 				E7BB75251F92EB4600E3B3E3 /* Evolver.swift in Sources */,
